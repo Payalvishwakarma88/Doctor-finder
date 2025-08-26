@@ -1,1 +1,86 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctor Search</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    input {
+      width: 80%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px 20px;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #2980b9;
+    }
+    .doctor {
+      background: white;
+      padding: 15px;
+      margin: 10px auto;
+      width: 80%;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔍 Doctor Search</h1>
+  <input type="text" id="search" placeholder="Enter doctor's name or specialty">
+  <button onclick="searchDoctor()">Search</button>
 
+  <div id="results"></div>
+
+  <script>
+    const doctors = [
+      { name: "Dr. A. Sharma", specialty: "Cardiologist" },
+      { name: "Dr. Neha Gupta", specialty: "Dermatologist" },
+      { name: "Dr. Rohan Mehta", specialty: "Dentist" },
+      { name: "Dr. Priya Singh", specialty: "Neurologist" }
+    ];
+
+    function searchDoctor() {
+      const query = document.getElementById('search').value.toLowerCase();
+      const resultsDiv = document.getElementById('results');
+      resultsDiv.innerHTML = "";
+
+      const results = doctors.filter(d =>
+        d.name.toLowerCase().includes(query) ||
+        d.specialty.toLowerCase().includes(query)
+      );
+
+      if (results.length > 0) {
+        results.forEach(d => {
+          resultsDiv.innerHTML += `
+            <div class="doctor">
+              <h3>${d.name}</h3>
+              <p>Specialty: ${d.specialty}</p>
+            </div>
+          `;
+        });
+      } else {
+        resultsDiv.innerHTML = "<p>No doctors found ❌</p>";
+      }
+    }
+  </script>
+</body>
+</html>
